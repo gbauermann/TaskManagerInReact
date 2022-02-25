@@ -6,6 +6,8 @@ import AddTask from './components/AddTask'
 //https://www.youtube.com/watch?v=w7ejDZ8SWv8
 
 function App() {
+  const [showAddTask, setShowAddTask] = useState(false);
+
   const [tasks, setTasks] = useState([
     {
         id: 1,
@@ -46,9 +48,15 @@ function App() {
 
   return (
     <div className="container">
-      <Header/>
-      <AddTask
-        onAddTask = {addTask}/>
+      <Header
+        onAdd={()=> setShowAddTask(!showAddTask)}
+        showAdd={showAddTask}
+      />
+      {showAddTask && 
+        <AddTask
+          onAddTask = {addTask}
+        />
+      }
       {tasks.length > 0 ? (
         <Tasks 
           tasks={tasks} 
